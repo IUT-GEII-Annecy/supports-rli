@@ -1,0 +1,69 @@
+\begin{UPSTIactivite}[2][Le protocole RS 485][][][Préparation]
+	\label{prepa:rs485}%
+	\UPSTIquestion{A partir du TD 2, rappeler le fonctionnement du protocole RS 485.}
+    \begin{itemize} 
+        \item Quelles tensions sont utilisées ? 
+        \item Quelle est la vitesse de transmission ?
+        \item Quelle est la longueur maximale du bus ?
+        \item Quelle est la différence avec le protocole RS 232 ?
+        \item Expliquer la notion de bit de parité et de bit de stop.
+        \end{itemize}
+\end{UPSTIactivite}
+
+Une trame DMX512 contient dans sa partie utile 512 octets, qui par leur position dans la trame définit la valeur de
+commande des 512 canaux. La norme laisse le soin à chaque constructeur de choisir l’interprétation de ces valeurs
+(comprises entre 0 et 255).
+\begin{UPSTIactivite}[2][Vitesse du DMX][][][Préparation]
+     \UPSTIquestion{Combien de trame par seconde peut-on envoyer via le réseau DMX ?}
+\end{UPSTIactivite}
+
+\subsection{Architecture du TP}
+Dans ce TP, on se propose d'utiliser un coupleur \textbf{750-652} pour mettre en oeuvre la commande d'un module DMX. Il jouera donc le rôle de maître DMX. 
+
+On reliera deux ballasts RGBW (Red Green Blue White). Sur ces deux ballasts, on fixe le canal de référence à l'aide de boutons poussoirs \textit{CH+} et \textit{CH-}. Ce canal de référence correspond à la sortie \textbf{R}, puis les canaux suivants seront respectivement \textbf{G}, \textbf{B} puis \textbf{W}. 
+Les éléments DMX de notre maquette sont installés en \textit{Daisy Chain}. Cela signifie que la sortie DMX du maître est reliée à l'entrée DMX du premier esclave, la sortie DMX de ce premier esclave est reliée à l'entrée DMX du second esclave, et ainsi de suite. La dernière sortie DMX de la chaîne n'est pas reliée.
+
+\begin{UPSTIactivite}[2][Architecture matérielle][][][Préparation]
+    \UPSTIquestion{Expliquer ce que fait le module \textbf{750-652}.}\\
+    \UPSTIquestion{Proposer un schéma structurel de l'architecture matérielle mise en place pour ce TP.}
+    \UPSTIquestion{Choisir des numéros de canaux pour chaque ballast RGBW et les indiquer sur le schéma structurel.} 
+\end{UPSTIactivite}
+
+\subsection{Programmation}
+
+\begin{UPSTIactivite}[2][DMX Master][][][Préparation]
+    \UPSTIquestion{A l'aide de l'annexe page \pageref{appendix:DMXMaster}, expliquer le rôle du bloc \textit{FbDMX\_Master}.}
+    \UPSTIquestion{De quel type et à quoi sert la variable \textbf{abDMX\_Values}?}
+\end{UPSTIactivite}
+\UPSTIboiteCentrale{Cahier des charges : Une couleur}{
+    On souhaite allumer la colonne de gauche d'une en orange \#ff4524. Ce code, au format HTML, donne l'intensité des trois canaux Rouge, Vert et Bleu codé en hexadécimal (R = ff, G = 45, B = 24).
+}
+\begin{UPSTIactivite}[2][Une couleur][][][Préparation]
+    \UPSTIquestion{Convertir les codes hexadécimaux des trois couleurs au format décimal et BYTE.}
+    \UPSTIquestion{Écrire un programme, en langage CFC (Blocs fonctions), permettant d'allumer la colonne de gauche de la couleur choisie.}
+    \UPSTIquestion{Ecrire le même programme en langage ST (Structured Text).}
+\end{UPSTIactivite}
+
+\UPSTIboiteCentrale{Cahier des charges : Succession de couleurs}{
+    \label{CDC:succession}
+    On souhaite effectuer une séquence de 10 couleurs différentes sur la colonne de droite (Canal 7).
+    La séquence de couleur est définie dans le tableau suivant : 
+
+    \begin{tabular}{|ccccccccccc|}
+        \hline
+        Couleur & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\\hline
+        \hline
+    B & 16\#00 & 16\#00 & 16\#00 & 16\#00 & 16\#00 & 16\#08 & 16\#10 & 16\#20 & 16\#40 & 16\#80 \\\hline
+    G & 16\#08 & 16\#10 & 16\#20 & 16\#40 & 16\#80 & 16\#80 & 16\#40 & 16\#20 & 16\#10 & 16\#08 \\\hline
+    R & 16\#80 & 16\#40 & 16\#20 & 16\#10 & 16\#08 & 16\#00 & 16\#00 & 16\#00 & 16\#00 & 16\#00 \\\hline
+    \end{tabular}
+}
+
+
+
+\begin{UPSTIactivite}[2][Succession de couleurs][][][Préparation]
+    Pour ce cahier des charges, on propose d'utiliser le bloc fonction \textit{FbRGB\_RecallColourPalette} (page~\pageref{appendix:RGBCross}) qui permet de faire varier la couleur d'un canal de manière progressive.\\
+    \UPSTIquestion{Déclarer un tableau permettant de stocker 10 couleurs.}
+    \UPSTIquestion{Écrire un programme, en langage ST, permettant de faire varier la couleur de la colonne à l'aide d'un potentiomètre donnant sa valeur sur une variable \textit{bValue} de type \textbf{BYTE}.}
+    On souhaite que les intervalles de couleurs soient les plus réguliers possible en fonction de la valeur du potentiomètre.
+\end{UPSTIactivite}

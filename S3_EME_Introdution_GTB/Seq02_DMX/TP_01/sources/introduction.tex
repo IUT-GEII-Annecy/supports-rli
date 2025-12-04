@@ -1,0 +1,48 @@
+Dans les bâtiments tertiaires et secondaires, 
+les techniques modernes de commande d’éclairage sont réalisées via le réseau non propriétaire DALI.
+Néanmoins, la dynamique de ce réseau reste trop lente par rapport aux exigences
+des effets de lumière que l’on souhaite faire sur les scènes de spectacle. Ainsi,
+dans le cadre de la commande de l’appareillage scénique (projecteurs RVB, lyres,
+stroboscopes, machines à fumée, gobo, \dots), les standards utilisés pour piloter ces
+équipements via des réseaux sont : pour le plus répandu DMX512 (cf. United States
+Institute for Theatre Technology : DMX512-A - Asynchronous Serial Digital Data
+Transmission), pour le plus récent Art-Net (cf. http://art-net.org.uk) ou bien
+encore les standards MIDI, Cobranet, \dots
+
+\UPSTIobjectif{Mettre en oeuvre le standard \textbf{DMX 512}, premier réseau à s’être imposé dans le monde du
+spectacle, à l’aide d’une structure de commande basée sur un automate programmable industriel.}
+
+\section{Le réseau DMX}
+
+DMX est l’acronyme de Digital MultipleX qui est la définition d’une interface
+numérique standardisée non propriétaire pour les équipements scéniques. Le terme 512
+fait référence au nombre de canaux disponibles sur un même réseau (appelé univers). La
+norme prévoit d'utiliser au maximum 32 systèmes de 16 canaux chacun. Un équipement
+DMX512 peut donc utiliser plusieurs canaux (par exemple, les ballasts RGBW que l’on
+utilisera nécessitent quatre canaux consécutifs).
+
+Comme le réseau DMX512 est unidirectionnel (du maitre vers les équipements uniquement), on ne dispose pas sur
+ce réseau de compte rendu sur les échanges et sur la communication. Par conséquent, ce standard ne doit pas être
+utilisé pour des spectacles ou des équipements réclamant de la sécurité (spectacles pyrotechniques, équipements
+assurant le gréement de décors, leur levage, \dots).
+
+\subsection{Caractéristiques techniques}
+\begin{itemize}
+    \item Tout équipement propose une entrée DMX IN(+, -), et une sortie DMX DMX IN
+    DMX OUT
+    OUT (+, -) (la sortie DMX OUT du dernier équipement sur la ligne doit
+    être connectée à une résistance d’impédance \SI{120}{ohm} )
+    \item Topologie de type Bus avec un câblage série de type « Daisy chain »
+    \item Bus Maitre-Esclaves unidirectionnel
+    Terminateur
+    \item Transmission série : 8 bits, 2 bits de stop, sans parité (RS 485)
+    de ligne
+    \item Vitesse de transmission : 250000 bit/s
+    R=\SI{120}{Ohm}
+    \item Longueur des câbles : 300 mètres entre équipements
+    \item Le pilotage simultané de plusieurs appareils s’effectue en leur attribuant
+    les mêmes canaux
+\end{itemize}
+
+
+
