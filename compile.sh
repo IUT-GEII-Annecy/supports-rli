@@ -9,6 +9,7 @@ if [ -z "$1" ]; then
 fi
 
 FILE="$1"
+OUT="${2:-pdf}"
 
 if [ ! -f "$FILE" ]; then
     echo "❌ Erreur: Le fichier '$FILE' n'existe pas"
@@ -18,24 +19,27 @@ fi
 DIR=$(dirname "$FILE")
 BASENAME=$(basename "$FILE" .tex)
 
+
 echo "📄 Compilation: $FILE"
 echo "📁 Répertoire: $DIR"
+echo "📁 Répertoire de sortie: $OUT"
 echo ""
 
 # Aller dans le répertoire du fichier
 cd "$DIR" || exit 1
+mkdir -p "$OUT"
 
 # Compilation (2 passes pour les références)
 echo "🔨 Passe 1/2..."
-pdflatex -interaction=nonstopmode "$BASENAME.tex" > /dev/null
+pdflatex -output-directory="$OUT" -interaction=nonstopmode "$BASENAME.tex" > /dev/null
 
 echo "🔨 Passe 2/2..."
-pdflatex -interaction=nonstopmode "$BASENAME.tex"
+pdflatex -output-directory="$OUT" -interaction=nonstopmode "$BASENAME.tex" 
 
-if [ -f "$BASENAME.pdf" ]; then
+if [ -f "$OUT/$BASENAME.pdf" ]; then
     echo ""
-    echo "✅ PDF généré: $DIR/$BASENAME.pdf"
-    ls -lh "$BASENAME.pdf"
+    echo "✅ PDF généré: $OUT/$BASENAME.pdf"
+    ls -lh "$OUT/$BASENAME.pdf"
 else
     echo ""
     echo "❌ Erreur: PDF non généré. Vérifiez les erreurs LaTeX ci-dessus."
