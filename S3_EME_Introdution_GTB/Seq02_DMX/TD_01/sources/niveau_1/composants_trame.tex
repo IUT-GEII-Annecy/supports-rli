@@ -1,0 +1,27 @@
+\begin{UPSTIexercice}{Identifier les composants d'une trame}
+On considère une trame DMX512 standard.
+\UPSTIquestion{Lister dans l'ordre les différentes parties qui composent une trame DMX, de son début jusqu'au dernier canal transmis.}
+\UPSTIquestion{Quelle est la valeur du Start Code pour une trame DMX standard contenant des données d'éclairage ?}
+\UPSTIquestion{Combien de canaux peut-on transmettre au maximum dans une seule trame DMX ?}
+\UPSTIquestion{Quelle est la plage de valeurs possibles pour un canal DMX ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Identifier les composants d'une trame}
+        \textbf{1)} Les parties d'une trame DMX dans l'ordre :
+        \begin{itemize}
+            \item BREAK (signal bas $\geq$ 88 $\mu$s)
+            \item MAB - Mark After Break (signal haut $\geq$ 8 $\mu$s)
+            \item Start Code (1 octet)
+            \item Canal 1 (1 octet)
+            \item Canal 2 (1 octet)
+            \item ... (jusqu'à 512 canaux maximum)
+        \end{itemize}
+
+        \textbf{2)} Le Start Code standard est \textbf{0x00} (0 en décimal).
+
+        \textbf{3)} On peut transmettre \textbf{512 canaux} maximum.
+
+        \textbf{4)} Chaque canal est codé sur 1 octet : valeurs de \textbf{0 à 255}.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

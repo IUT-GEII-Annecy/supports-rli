@@ -1,0 +1,45 @@
+
+
+\UPSTIobjectifs{
+	\begin{itemize}
+		\item Mettre en oeuvre une stratégie d'éclairage à l'aide du protocole DALI
+		\item Comprendre l'architecture DALI
+	\end{itemize}
+}
+
+Dans le tertiaire, l'éclairage représente environ 40\% de la consommation électrique. On estime que 30\% de cette consommation est inutile. Il devient essentiel de mettre en place des stratégies d'éclairage intelligentes.\\
+
+Le protocole DALI, par la finesse de son contrôle, permet de mettre en place des stratégies d'éclairage intelligentes en vue d'améliorer l'efficacité électrique des bâtiments tout en améliorant le confort des occupants.\\
+
+Pour rappel, les caractéristiques principales du protocole DALI sont :
+
+\begin{multicols}{3}
+	\begin{description}
+\item[Tension] 16 V
+\item[Courant] 250 mA
+\item[Longueur maximale] 300 m
+\item[Débit] 1200 bauds
+\item[Codage] Manchester
+\item[Câblage] Paire différentielle torsadée
+\item[Topologie] Bus, étoile ou combinaison des deux
+\item[Nombre de participants] 64
+\item[Nombre de groupes] 16
+\item[Nombre de scènes] 16
+\item[Stratégie] Maître/esclave
+\end{description}
+\end{multicols}
+
+Pour chaque point d'éclairage, il est possible de définir les informations suivantes, qui seront mémorisées dans le ballast :
+\begin{itemize}
+	\item Valeur minimum et maximum de la luminosité
+	\item Temps de montée et de descente (\textit{Fade in, Fade out})
+	\item Niveau de lumière à la mise sous tension
+	\item Niveau de lumière en cas de coupure de liaison avec le contrôleur
+\end{itemize}
+
+Il existe un grand nombre d'instructions répertoriées dans la norme IEC 6092. Celles-ci permettent de contrôler les luminaires, de les regrouper, de les organiser en scènes, de les programmer, etc.\\ Une liste de ces commandes peut être trouvée en suivant le lien suivant : \\\url{https://onlinedocs.microchip.com/pr/GUID-0CDBB4BA-5972-4F58-98B2-3F0408F3E10B-en-US-1/}
+
+
+	\hfill\includegraphics[height=2cm]{frame.png}
+
+

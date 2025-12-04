@@ -1,0 +1,42 @@
+\begin{UPSTIexercice}{Pannes courantes - Analyse}
+Pour chaque situation décrite ci-dessous, identifier la cause probable du problème et proposer une solution.
+
+\textbf{Situation 1 :} Sur une chaîne de 15 projecteurs, seuls les 8 premiers fonctionnent correctement. Les 7 derniers ne répondent pas du tout.
+
+\textbf{Situation 2 :} Les projecteurs en fin de ligne clignotent de manière aléatoire et ne répondent pas correctement aux commandes.
+
+\textbf{Situation 3 :} Tous les appareils d'une installation fonctionnent correctement lorsqu'il y a moins de 10 appareils connectés. Au-delà, des dysfonctionnements apparaissent sur les derniers appareils de la chaîne.
+
+\textbf{Situation 4 :} Un projecteur RGB affiche toujours du rouge à pleine intensité, même quand le contrôleur envoie la valeur 0 sur le canal rouge.
+
+\UPSTIquestion{Pour chaque situation, identifier la cause probable.}
+\UPSTIquestion{Proposer une solution ou une procédure de test pour chaque cas.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Pannes courantes - Analyse}
+        \textbf{Situation 1 :}
+        \begin{itemize}
+            \item \textbf{Cause probable :} Câble coupé ou déconnecté entre l'appareil 8 et l'appareil 9. Ou bien l'appareil 9 a sa sortie DMX OUT défectueuse.
+            \item \textbf{Solution :} Vérifier le câble entre les appareils 8 et 9. Tester en connectant l'appareil 9 directement au contrôleur. Si le problème persiste, l'appareil 9 est défectueux (court-circuiter temporairement en reliant 8 à 10).
+        \end{itemize}
+
+        \textbf{Situation 2 :}
+        \begin{itemize}
+            \item \textbf{Cause probable :} Absence de résistance de terminaison en bout de ligne. Les réflexions de signal causent des erreurs de transmission.
+            \item \textbf{Solution :} Installer une résistance de 120 $\Omega$ entre Data+ et Data- sur le dernier appareil de la chaîne (ou activer la terminaison intégrée si disponible).
+        \end{itemize}
+
+        \textbf{Situation 3 :}
+        \begin{itemize}
+            \item \textbf{Cause probable :} Dépassement de la limite de 32 récepteurs sur le bus DMX. Au-delà, l'impédance de charge devient trop faible et dégrade le signal.
+            \item \textbf{Solution :} Utiliser un splitter DMX pour diviser le bus en plusieurs branches ou régénérer le signal. Alternative : vérifier que certains appareils ne présentent pas une charge d'entrée anormalement élevée.
+        \end{itemize}
+
+        \textbf{Situation 4 :}
+        \begin{itemize}
+            \item \textbf{Cause probable :} Mauvais adressage du projecteur. Il écoute probablement le mauvais canal (conflit d'adresse ou erreur de configuration).
+            \item \textbf{Solution :} Vérifier l'adresse DMX configurée sur le projecteur et s'assurer qu'elle correspond au plan d'adressage prévu. Vérifier également le mode de fonctionnement (certains projecteurs ont plusieurs modes utilisant un nombre différent de canaux).
+        \end{itemize}
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

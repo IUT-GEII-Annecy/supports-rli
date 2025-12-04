@@ -1,0 +1,77 @@
+\subsection{Première communication}
+
+\begin{UPSTIPreparation}[Le bloc FbDALI\_Joblist]
+	\label{prepa:fbDALIJoblist}
+	\UPSTIquestion{À l'aide de l'annexe  \ref{appendix:fbDALIJoblist}, page~\pageref{appendix:fbDALIJoblist}, expliquer le rôle de ce bloc fonction.}
+	\vspace{2cm}
+	\UPSTIquestion{Dessiner le bloc fonction \textbf{FbDALI\_Joblist} permettant l'envoie de commandes au coupleur DALI.\label{q:fbDALIJoblist}}
+	\textit{On ne s'intéresse pas aux valeurs des variables.}
+	\vspace{4cm}
+\end{UPSTIPreparation}
+
+%Nous proposons d'utiliser un bloc fonction afin de commander l'éclairage d'un plafonnier. Ce fonctionnement est très simple :
+
+\UPSTIboiteCentrale{Cahier des charges \textit{Plafonnier 1}}{
+	\label{cdc:plaf1}
+	\begin{itemize}
+		\item Le plafonnier est commandé par le bouton blanc : chaque appui change son état (allumé ou éteint).
+	\end{itemize}
+}
+
+
+\begin{UPSTIPreparation}[Fonctionnement Télérupteur]
+	\label{prepa:telerupteur}%
+	\UPSTIquestion{A l'aide de l'annexe \ref{appendix:fbDALILatchingRelay} page \pageref{appendix:fbDALILatchingRelay}, expliquer le rôle du bloc \textbf{FbDALI\_LatchingRelay}.}\vspace{1cm}
+	\UPSTIquestion{Dessiner ce bloc ainsi que les valeurs à placer en Entrée et en Sortie pour réaliser le cahier des charges ci-dessus.\\\textit{Note : Certaines entrées peuvent être laissées vides.}\label{q:fbDALILatchingRelay}}\vspace{5.2cm}
+\end{UPSTIPreparation}
+
+
+\subsection{Envoi de commandes avancées}
+Nous nous intéressons dans cette section au bloc \textbf{FbDALI\_Master} (Annexe \ref{appendix:fbDALIMaster}, page~\pageref{appendix:fbDALIMaster}).
+
+\begin{UPSTIPreparation}[Bloc FbDALI\_Master]
+	\label{act:fbDALIMaster}
+	\UPSTIquestion{À l'aide de l'annexe \ref{appendix:fbDALIMaster}, page~\pageref{appendix:fbDALIMaster}, expliquer le fonctionnement de ce bloc.}
+	\vspace{1.5cm}
+	\UPSTIquestion{Identifier les principales entrées du bloc \textbf{FbDALI\_Master} : adresse DALI, valeur de commande, déclenchement.}
+	\vspace{3cm}
+	\UPSTIquestion{Dessiner le bloc fonction \textbf{FbDALI\_Master} en CFC permettant d'envoyer une commande au ballast Rouge (adresse DALI 10). Indiquer les principales entrées nécessaires.}
+	\vspace{5.5cm}
+\end{UPSTIPreparation}
+
+\begin{UPSTIPreparation}[La fonction FuDimmValue][]
+	\UPSTIquestion{À l'aide de l'annexe \ref{appendix:fuDimmValue}, page~\pageref{appendix:fuDimmValue}, expliquer le fonctionnement de cette fonction.}
+	\vspace{1.2cm}\\
+	On veut éclairer le ballast rouge à 50\% de sa puissance maximale.
+	\UPSTIquestion{Écrire une ligne en ST qui utilise cette fonction pour calculer la valeur de commande DALI correspondant à 50\%.}\\
+	\\bValeurCommande := FuDimmValue(50.0);
+	\vspace{1cm}
+\end{UPSTIPreparation}
+
+
+
+
+%	\UPSTIquestion{Proposer une classe \textbf{CDaliJobList} pour éviter l'éparpillement des données.}\\
+%\parbox[][3.5cm]{\textwidth}{}
+
+
+% \subsection{Mise en place de la stratégie d'éclairage}
+% \UPSTIboiteCentrale{Cahier des charges 2}{
+% 	\label{cdc:1}
+% 	\begin{itemize}
+% 		\item La lampe rouge est allumée à 100\% lorsque le bouton rouge est appuyé.
+% 		\item La lampe rouge est éteinte lorsque le bouton rouge est relâché.
+% 	\end{itemize}
+% }
+
+% Pour réaliser ce cahier des charges, on se propose d'agir directement sur l'intensité lumineuse (0\% ou 100\%) de la lampe par la commande standard \textbf{Direct control of lamp power}. On utilisera alors la fonction \textbf{FuDimmValue\_DALI} (Annexe \ref{appendix:fuDimmValue}, page~\pageref{appendix:fuDimmValue}).
+
+% \begin{UPSTIactivite}[2][][][][Préparation]
+% 	\UPSTIquestion{Écrire, en texte structuré, le programme permettant de réaliser le cahier des charges.}
+% 	\textit{Nommer correctement les variables utilisées.}
+% 	\vspace{9cm}
+% \end{UPSTIactivite}
+
+
+
+

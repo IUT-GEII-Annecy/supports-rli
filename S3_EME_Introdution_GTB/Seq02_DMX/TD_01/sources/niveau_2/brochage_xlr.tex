@@ -1,0 +1,32 @@
+\begin{UPSTIexercice}{Brochage XLR}
+On utilise des connecteurs XLR 5 broches pour une installation DMX professionnelle.
+
+\UPSTIquestion{Donner la fonction de chacune des 5 broches du connecteur XLR 5.}
+\UPSTIquestion{Quelles sont les deux broches essentielles pour la transmission du signal DMX ?}
+\UPSTIquestion{Pourquoi le connecteur XLR 5 broches est-il préférable au XLR 3 broches pour le DMX ?}
+\UPSTIquestion{Peut-on utiliser un câble XLR audio (micro) pour une installation DMX temporaire ? Justifier.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Brochage XLR}
+        \textbf{1)} Brochage XLR 5 broches :
+        \begin{itemize}
+            \item Broche 1 : Masse / Blindage (GND)
+            \item Broche 2 : Data- (DMX-)
+            \item Broche 3 : Data+ (DMX+)
+            \item Broche 4 : Réservé (seconde paire Data2-)
+            \item Broche 5 : Réservé (seconde paire Data2+)
+        \end{itemize}
+
+        \textbf{2)} Broches essentielles : \textbf{2 (Data-)} et \textbf{3 (Data+)}
+
+        \textbf{3)} Le XLR 5 broches permet :
+        \begin{itemize}
+            \item D'éviter la confusion avec les câbles audio XLR 3
+            \item De prévoir une seconde paire pour des extensions futures (ex: RDM)
+            \item Une meilleure séparation des signaux
+        \end{itemize}
+
+        \textbf{4)} En dépannage temporaire, oui, car les broches 1, 2, 3 sont câblées de la même façon. \textbf{MAIS} le câble audio n'a pas la bonne impédance (typiquement 75-110 $\Omega$ au lieu de 120 $\Omega$), ce qui peut causer des problèmes sur de longues distances ou avec beaucoup d'appareils. \textbf{Non recommandé pour une installation permanente}.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

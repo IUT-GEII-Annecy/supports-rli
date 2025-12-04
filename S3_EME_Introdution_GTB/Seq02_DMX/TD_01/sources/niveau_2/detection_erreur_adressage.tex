@@ -1,0 +1,38 @@
+\begin{UPSTIexercice}{Détection d'erreur d'adressage}
+Un technicien a mal configuré l'adressage d'une installation comportant :
+\begin{itemize}
+    \item 1 projecteur RGB à l'adresse 10
+    \item 1 stroboscope (1 canal) à l'adresse 11
+    \item 1 autre projecteur RGB à l'adresse 13
+\end{itemize}
+
+\UPSTIquestion{Identifier le problème dans cette configuration.}
+\UPSTIquestion{Expliquer les conséquences sur le fonctionnement des appareils.}
+\UPSTIquestion{Proposer une correction de l'adressage pour que tous les appareils fonctionnent correctement.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Détection d'erreur d'adressage}
+        \textbf{1)} Problème : Le premier projecteur RGB (adresse 10) utilise les canaux 10, 11 et 12. Le stroboscope est configuré sur le canal 11, qui est \textbf{déjà utilisé} par le projecteur RGB. Il y a un \textbf{conflit d'adressage}.
+
+        \textbf{2)} Conséquences :
+        \begin{itemize}
+            \item Le stroboscope et le canal Vert du projecteur RGB écouteront tous deux le canal 11
+            \item Le contrôle du projecteur RGB sera incorrect (impossible de régler le vert indépendamment)
+            \item Le stroboscope s'activera quand on règle le vert du projecteur
+        \end{itemize}
+
+        \textbf{3)} Correction :
+        \begin{center}
+        \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Appareil} & \textbf{Adresse DMX} & \textbf{Canaux utilisés} \\
+        \hline
+        Projecteur RGB 1 & 10 & 10, 11, 12 \\
+        Stroboscope & 13 & 13 \\
+        Projecteur RGB 2 & 14 & 14, 15, 16 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

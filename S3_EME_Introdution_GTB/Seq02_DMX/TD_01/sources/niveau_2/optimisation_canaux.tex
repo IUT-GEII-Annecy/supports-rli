@@ -1,0 +1,31 @@
+\begin{UPSTIexercice}{Optimisation du nombre de canaux}
+Dans la pratique, on ne transmet pas toujours les 512 canaux. Un contrôleur DMX peut optimiser la transmission en n'envoyant que les canaux réellement utilisés.
+
+On considère une installation utilisant uniquement les canaux 1 à 24.
+
+\UPSTIquestion{Calculer la durée d'une trame DMX optimisée transmettant uniquement 24 canaux.}
+\UPSTIquestion{Calculer la fréquence de rafraîchissement maximale pour cette installation.}
+\UPSTIquestion{Quel est le gain de temps (en \%) par rapport à une trame complète de 512 canaux ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Optimisation du nombre de canaux}
+        \textbf{1)} Durée avec 24 canaux (+ Start Code = 25 octets) :
+        \begin{align*}
+        T_{\text{octets}} &= 25 \times 44~\mu\text{s} = 1\,100~\mu\text{s} \\
+        T_{\text{trame}} &= 176 + 12 + 1\,100 = \boxed{1\,288~\mu\text{s} = 1{,}288~\text{ms}}
+        \end{align*}
+
+        \textbf{2)} Fréquence maximale :
+        \[
+        f_{\text{max}} = \frac{1}{1{,}288 \times 10^{-3}} \approx \boxed{776{,}4~\text{Hz}}
+        \]
+
+        \textbf{3)} Gain de temps :
+        \[
+        \text{Gain} = \frac{22{,}76 - 1{,}288}{22{,}76} \times 100\% \approx \boxed{94{,}3\%}
+        \]
+
+        L'optimisation permet une fréquence de rafraîchissement environ \textbf{17 fois plus élevée} !
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

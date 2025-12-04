@@ -1,0 +1,84 @@
+\begin{UPSTIexercice}{Installation mixte}
+On doit installer sur un même univers DMX :
+\begin{itemize}
+    \item 6 dimmers simples (1 canal chacun)
+    \item 4 projecteurs LED RGB (3 canaux chacun)
+    \item 2 lyres (16 canaux chacune)
+\end{itemize}
+
+On souhaite organiser l'adressage de la manière suivante :
+\begin{itemize}
+    \item Les dimmers occupent les premières adresses
+    \item Les projecteurs RGB suivent
+    \item Les lyres en dernier
+\end{itemize}
+
+\UPSTIquestion{Calculer le nombre total de canaux utilisés.}
+\UPSTIquestion{Vérifier que cette installation est compatible avec un univers DMX (512 canaux).}
+\UPSTIquestion{Compléter le plan d'adressage suivant :}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Appareil} & \textbf{Type} & \textbf{Adresse DMX} & \textbf{Canaux utilisés} \\
+\hline
+Dimmer 1 & 1 canal & 1 & 1 \\
+\hline
+Dimmer 2 & 1 canal & ? & ? \\
+\hline
+... & ... & ... & ... \\
+\hline
+RGB 1 & 3 canaux & ? & ? \\
+\hline
+... & ... & ... & ... \\
+\hline
+Lyre 1 & 16 canaux & ? & ? \\
+\hline
+Lyre 2 & 16 canaux & ? & ? \\
+\hline
+\end{tabular}
+\end{center}
+
+\UPSTIquestion{Quel est le numéro du dernier canal utilisé ?}
+\UPSTIquestion{Combien de canaux restent disponibles pour d'autres appareils ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Installation mixte}
+        \textbf{1)} Nombre total de canaux :
+        \begin{align*}
+        N_{\text{total}} &= (6 \times 1) + (4 \times 3) + (2 \times 16) \\
+        &= 6 + 12 + 32 = \boxed{50~\text{canaux}}
+        \end{align*}
+
+        \textbf{2)} $50 < 512$ : \textbf{Compatible} avec un univers DMX.
+
+        \textbf{3)} Plan d'adressage complet :
+        \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Appareil} & \textbf{Type} & \textbf{Adresse DMX} & \textbf{Canaux utilisés} \\
+        \hline
+        Dimmer 1 & 1 canal & 1 & 1 \\
+        Dimmer 2 & 1 canal & 2 & 2 \\
+        Dimmer 3 & 1 canal & 3 & 3 \\
+        Dimmer 4 & 1 canal & 4 & 4 \\
+        Dimmer 5 & 1 canal & 5 & 5 \\
+        Dimmer 6 & 1 canal & 6 & 6 \\
+        \hline
+        RGB 1 & 3 canaux & 7 & 7, 8, 9 \\
+        RGB 2 & 3 canaux & 10 & 10, 11, 12 \\
+        RGB 3 & 3 canaux & 13 & 13, 14, 15 \\
+        RGB 4 & 3 canaux & 16 & 16, 17, 18 \\
+        \hline
+        Lyre 1 & 16 canaux & 19 & 19 à 34 \\
+        Lyre 2 & 16 canaux & 35 & 35 à 50 \\
+        \hline
+        \end{tabular}
+        \end{center}
+
+        \textbf{4)} Dernier canal utilisé : \textbf{50}
+
+        \textbf{5)} Canaux disponibles : $512 - 50 = \boxed{462~\text{canaux}}$
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

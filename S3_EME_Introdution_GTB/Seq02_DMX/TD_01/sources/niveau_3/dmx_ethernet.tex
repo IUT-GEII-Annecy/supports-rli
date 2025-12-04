@@ -1,0 +1,28 @@
+\begin{UPSTIexercice}{DMX sur Ethernet (optionnel)}
+Pour les grandes installations, le DMX peut être transporté sur des réseaux Ethernet.
+
+\UPSTIquestion{Citer deux protocoles permettant de transporter du DMX sur Ethernet.}
+\UPSTIquestion{Quels sont les avantages de ces solutions par rapport au DMX filaire traditionnel ?}
+\UPSTIquestion{Rechercher ce qu'est un "nœud DMX" (DMX node) dans ce contexte.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{DMX sur Ethernet (optionnel)}
+        \textbf{1)} Deux protocoles courants :
+        \begin{itemize}
+            \item \textbf{Art-Net} (protocole ouvert, très répandu)
+            \item \textbf{sACN} (streaming ACN, ANSI E1.31, standard ESTA)
+        \end{itemize}
+
+        \textbf{2)} Avantages :
+        \begin{itemize}
+            \item Distribution sur de très longues distances (limitation : réseau Ethernet)
+            \item Possibilité de transporter plusieurs univers DMX sur un seul câble
+            \item Infrastructure réseau standard (switches, câbles Cat5e/Cat6)
+            \item Possibilité de contrôle via réseau IP (WiFi, Internet)
+            \item Monitoring et diagnostic via le réseau
+        \end{itemize}
+
+        \textbf{3)} Un \textbf{nœud DMX} (DMX node ou gateway) est un appareil qui convertit les données DMX transportées sur Ethernet (Art-Net, sACN) en signaux DMX512 classiques (RS-485). Il possède généralement plusieurs sorties DMX (univers) et une connexion Ethernet.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

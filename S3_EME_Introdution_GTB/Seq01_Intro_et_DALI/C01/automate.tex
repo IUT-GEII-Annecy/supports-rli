@@ -1,0 +1,132 @@
+\section{Partie commande d'une GTB}
+
+La commande d'une GTB est assurée par un automate programmable industriel (API). Cet automate est un ordinateur industriel programmable. Il est capable de communiquer avec les différents équipements du bâtiment (capteurs, actionneurs, superviseur, etc.) par l'intermédiaire de BUS de terrain. 
+
+\subsection{Automate programmés et automates programmables}
+Les constructeurs d'automates proposent des structures de commande spécifiques à certains domaines d'activité. Ces automates sont appelés automates programmés. Ils doivent être configurés pour mise en service. Ils ne sont pas programmables.\\
+
+Les automates programmables sont des ordinateurs industriels programmables. Ils sont capables de communiquer avec les différents équipements du bâtiment (capteurs, actionneurs, superviseur, etc.) par l'intermédiaire de BUS de terrain.
+Ceux-ci sont programmables et donc plus versatiles. 
+
+Les constructeurs fournissent des bibliothèques de fonctions permettant de gérer les différents BUS de terrain.
+
+\subsection{Rappel : Le cycle automate}
+
+\begin{minipage}{0.55\linewidth}
+Quelques caractéristiques du système d'exploitation d'un automate :
+\begin{itemize}
+    \item Temps réel (chien de garde)
+    \item Déterministe
+    \item Interruptible
+    \item Monotâche ou Multitâches 
+    \item Accès facilités aux entrées/sorties
+    \item Accès facilités à la mémoire
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.4\linewidth}
+    \begin{UPSTIactivite}[][Cycle automate]
+        \UPSTIeleveOnly{\vspace{7cm}}
+        \UPSTIprofOnly{\includegraphics[height=6.5cm]{cycleAutomate}}
+    \end{UPSTIactivite}
+\end{minipage}
+
+\pagebreak
+\subsection{Langages de programmation des automates}
+Les automates programmables peuvent être programmés dans plusieurs langages normalisés par la norme CEI 61131-3. Les langages les plus couramment utilisés sont :
+\begin{itemize}
+    \item Le langage à contacts (LAD) : langage graphique proche des schémas électriques.
+    \item Le langage blocs fonctionnels (FBD) : langage graphique basé sur l'assemblage de blocs fonctionnels.
+    \item Le langage structuré (ST) : langage textuel proche du langage Pascal.
+    \item Le langage Sequencer (SFC) : langage graphique permettant de représenter un processus par des étapes et des transitions.
+\end{itemize}
+Chaque langage possède ses avantages et ses inconvénients. Le choix du langage dépend souvent des préférences de l'équipe de développement et des exigences spécifiques du projet.
+\subsection{Les blocs fonctionnels}
+
+\UPSTIeleveOnly{\casesGrid{2\linewidth}{32}}
+\begin{UPSTIprofOnlyEnv}
+\paragraph{Définition : } Un bloc fonctionnel est une entité de programmation réutilisable qui encapsule une fonction ou un ensemble de fonctions. Il possède des entrées, des sorties et peut contenir des variables internes. Les blocs fonctionnels sont utilisés pour structurer et modulariser les programmes d'automates, facilitant ainsi la conception, la maintenance et la réutilisation du code.
+
+\paragraph{Bloc fonctionnel vs Fonction :} Les variables déclarée dans une fonction sont temporaires et disparaissent à la fin de l'exécution de la fonction. Dans un bloc fonctionnel, les variables internes conservent leur valeur entre deux appels du bloc. Cela permet de mémoriser des états ou des informations importantes pour le fonctionnement du bloc.
+
+\paragraph{Programmation avec un bloc fonctionnel : } Pour programmer avec un bloc fonctionnel, on suit généralement les étapes suivantes :
+\begin{enumerate}
+    \item Définir les entrées et les sorties du bloc fonctionnel.
+    \item Déclarer les variables internes nécessaires au fonctionnement du bloc.
+    \item Écrire le code qui décrit le comportement du bloc en utilisant les entrées, les sorties et les variables internes.
+    \item Tester et valider le bloc fonctionnel pour s'assurer qu'il fonctionne correctement.
+\end{enumerate}
+Pour utiliser un bloc fonctionnel dans un programme, il faut suivre ces étapes :
+\begin{enumerate}
+    \item Instancier le bloc fonctionnel dans le programme principal.
+    \item Appeler le bloc fonctionnel
+    \item Connecter les entrées du bloc aux variables ou signaux appropriés.
+    \item Récupérer les sorties du bloc pour les utiliser dans le programme principal.
+    \item Exécuter le programme principal, qui inclut l'appel au bloc fonctionnel.
+\end{enumerate}
+\pagebreak
+\end{UPSTIprofOnlyEnv}
+\subsubsection{Exemples de bloc fonctionnel}
+\paragraph{Les temporisateurs}
+Trois types de temporisateurs sont couramment utilisés dans les automates programmables :
+\begin{itemize}
+    \item Temporisateur à la montée (TON) : Ce temporisateur s'active lorsque son entrée est mise à 1. Après un délai prédéfini, sa sortie passe à 1 tant que l'entrée reste à 1.
+    \item Temporisateur à la descente (TOF) : Ce temporisateur s'active lorsque son entrée est mise à 0. Après un délai prédéfini, sa sortie passe à 0 tant que l'entrée reste à 0.
+    \item Temporisateur impulsionnel (TP) : Ce temporisateur génère une impulsion de durée fixe sur sa sortie lorsqu'il est activé par une transition de son entrée de 0 à 1.
+\end{itemize}
+
+La documentation de ces temporisateurs décrit les entrées et sorties de ces blocs dans le tableau suivant :
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Nom} & \textbf{Type} & \textbf{Description} & \textbf{Unité} \\\hline
+        \multicolumn{4}{|c|}{\textbf{Entrées}} \\
+        \hline
+        IN & BOOL & Entrée de commande du temporisateur & - \\
+        \hline
+        PT & TIME & Temps prédéfini avant l'activation de la sortie & ms, s, min \\\hline
+        \multicolumn{4}{|c|}{\textbf{Sorties}} \\
+        \hline
+        Q & BOOL & Sortie du temporisateur & - \\
+        \hline
+        ET & TIME & Temps écoulé depuis l'activation du temporisateur & ms, s, min \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\paragraph{Le bloc Set/Reset}
+Le bloc Set/Reset est un bloc fonctionnel utilisé pour mémoriser un état binaire. Il possède deux entrées principales : une entrée "Set" (S) et une entrée "Reset" (R). Lorsque l'entrée "Set" est activée (mise à 1), la sortie du bloc passe à 1 et reste à 1 jusqu'à ce que l'entrée "Reset" soit activée (mise à 1), ce qui fait passer la sortie à 0.
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Nom} & \textbf{Type} & \textbf{Description} & \textbf{Unité} \\\hline
+        \multicolumn{4}{|c|}{\textbf{Entrées}} \\
+        \hline
+        S & BOOL & Entrée de mise à 1 de la sortie & - \\
+        \hline
+        R & BOOL & Entrée de remise à 0 de la sortie & - \\\hline
+        \multicolumn{4}{|c|}{\textbf{Sorties}} \\
+        \hline
+        Q & BOOL & Sortie mémorisée du bloc Set/Reset & - \\
+        \hline
+    \end{tabular}
+\end{center}
+\pagebreak
+\begin{UPSTIactivite}[][Utilisation d'un temporisateur]
+    \resetNumQuestion
+    \UPSTIquestion{Ecrire un programme en langage FBD utilisant un temporisateur pour allumer une lampe 5 secondes à chaque appui sur un bouton poussoir.}  \vspace*{-10pt}
+    \casesGrid{2\linewidth}{12}
+
+    \UPSTIquestion{Ecrire un programme en langage FBD utilisant un temporisateur pour laisser une lampe allumée pendant 1 min après la dernière détection de présence par un capteur.}  \vspace*{-10pt}
+    \casesGrid{2\linewidth}{12}
+
+    \UPSTIquestion{Ecrire un programme en langage FBD utilisant un temporisateur pour allumer une lampe après un appui long de 3 secondes sur un bouton poussoir. La lampe doit s'éteindre au prochain nouvel appui sur le bouton.}  \vspace*{-10pt}
+    \casesGrid{2\linewidth}{13}
+\end{UPSTIactivite}
+
+\subsection{Le langage FBD}
+En GTB, le langage le plus utilisé est le langage blocs fonctionnels (FBD). Ce langage permet de représenter graphiquement des fonctions logiques et des opérations de traitement de données à l'aide de blocs interconnectés. Chaque bloc représente une fonction spécifique, telle qu'une opération logique, une opération arithmétique, un temporisateur, un compteur, etc.
+
+Les blocs sont connectés entre eux par des lignes qui représentent le flux de données. Les entrées et les sorties des blocs sont clairement définies, ce qui facilite la compréhension du programme. 
+
+

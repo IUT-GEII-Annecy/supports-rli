@@ -1,0 +1,133 @@
+\begin{UPSTIexercice}{Étude de cas : Festival en plein air}
+Un organisateur de festival souhaite installer un système d'éclairage pour une scène extérieure. L'installation comprend :
+
+\textbf{Équipements :}
+\begin{itemize}
+    \item 32 projecteurs PAR LED RGB (3 canaux chacun) répartis sur la structure de scène
+    \item 6 lyres (18 canaux chacune) en fond de scène
+    \item 8 stroboscopes (1 canal chacun) sur les côtés
+    \item 2 lasers (8 canaux chacun)
+\end{itemize}
+
+\textbf{Contraintes :}
+\begin{itemize}
+    \item Le contrôleur DMX est installé en régie, à 85 mètres de la scène
+    \item Les projecteurs PAR sont répartis en 4 groupes de 8 projecteurs chacun
+    \item Le budget impose l'utilisation d'un seul contrôleur DMX (2 univers disponibles)
+\end{itemize}
+
+\UPSTIquestion{Calculer le nombre total de canaux DMX nécessaires.}
+
+\UPSTIquestion{Proposer une répartition des appareils sur 2 univers en justifiant vos choix (facilité de programmation, câblage, etc.).}
+
+\UPSTIquestion{Pour l'univers 1, établir un plan d'adressage détaillé en regroupant les PAR LED par groupe.}
+
+\UPSTIquestion{Calculer la durée d'une trame DMX pour chaque univers (en considérant que seuls les canaux utilisés sont transmis).}
+
+\UPSTIquestion{En déduire la fréquence de rafraîchissement maximale pour chaque univers.}
+
+\UPSTIquestion{La distance de 85 mètres entre la régie et la scène est-elle compatible avec le DMX ? Quelles précautions doit-on prendre ?}
+
+\UPSTIquestion{Proposer un schéma de câblage pour minimiser la longueur de câble nécessaire, sachant que les 4 groupes de PAR sont aux 4 coins de la scène, les lyres en fond de scène et les stroboscopes sur les côtés.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Étude de cas : Festival en plein air}
+        \textbf{1)} Nombre total de canaux :
+        \begin{align*}
+        N_{\text{total}} &= (32 \times 3) + (6 \times 18) + (8 \times 1) + (2 \times 8) \\
+        &= 96 + 108 + 8 + 16 \\
+        &= \boxed{228~\text{canaux}}
+        \end{align*}
+
+        \textbf{2)} Répartition sur 2 univers (proposition) :
+
+        \textbf{Univers 1 :} Effets statiques et dynamiques (132 canaux)
+        \begin{itemize}
+            \item 32 PAR LED RGB : $32 \times 3 = 96$ canaux
+            \item 6 Lyres : $6 \times 18 = 108$ canaux $\to$ \textbf{Trop ! Mettre 3 lyres seulement = 54 canaux}
+            \item Total Univers 1 : $96 + 54 = 150$ canaux
+        \end{itemize}
+
+        \textbf{Univers 2 :} Compléments et effets spéciaux (78 canaux)
+        \begin{itemize}
+            \item 3 Lyres restantes : $3 \times 18 = 54$ canaux
+            \item 8 Stroboscopes : $8 \times 1 = 8$ canaux
+            \item 2 Lasers : $2 \times 8 = 16$ canaux
+            \item Total Univers 2 : $54 + 8 + 16 = 78$ canaux
+        \end{itemize}
+
+        \textit{Justification :} Cette répartition sépare les PAR (wash général) des effets mobiles, facilite la programmation et équilibre la charge entre les deux univers.
+
+        \textbf{3)} Plan d'adressage Univers 1 :
+
+        \begin{center}
+        \scriptsize
+        \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Appareil} & \textbf{Adresse} & \textbf{Canaux} \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Groupe 1 - Jardin avant}} \\
+        \hline
+        PAR 1 à 8 & 1, 4, 7, ..., 22 & 1-24 \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Groupe 2 - Cour avant}} \\
+        \hline
+        PAR 9 à 16 & 25, 28, 31, ..., 46 & 25-48 \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Groupe 3 - Jardin arrière}} \\
+        \hline
+        PAR 17 à 24 & 49, 52, 55, ..., 70 & 49-72 \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Groupe 4 - Cour arrière}} \\
+        \hline
+        PAR 25 à 32 & 73, 76, 79, ..., 94 & 73-96 \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Lyres (3 premières)}} \\
+        \hline
+        Lyre 1 & 97 & 97-114 \\
+        Lyre 2 & 115 & 115-132 \\
+        Lyre 3 & 133 & 133-150 \\
+        \hline
+        \end{tabular}
+        \end{center}
+
+        \textbf{4)} Durée des trames :
+
+        \textit{Univers 1 (150 canaux + Start Code = 151 octets) :}
+        \begin{align*}
+        T_1 &= 176 + 12 + (151 \times 44) = 188 + 6\,644 = \boxed{6\,832~\mu\text{s} = 6{,}83~\text{ms}}
+        \end{align*}
+
+        \textit{Univers 2 (78 canaux + Start Code = 79 octets) :}
+        \begin{align*}
+        T_2 &= 176 + 12 + (79 \times 44) = 188 + 3\,476 = \boxed{3\,664~\mu\text{s} = 3{,}66~\text{ms}}
+        \end{align*}
+
+        \textbf{5)} Fréquences de rafraîchissement :
+        \[
+        f_1 = \frac{1}{6{,}83 \times 10^{-3}} \approx \boxed{146~\text{Hz}}
+        \]
+        \[
+        f_2 = \frac{1}{3{,}66 \times 10^{-3}} \approx \boxed{273~\text{Hz}}
+        \]
+
+        \textbf{6)} Distance de 85 m : \textbf{Compatible} (limite : 300-400 m).
+
+        \textit{Précautions :}
+        \begin{itemize}
+            \item Utiliser un câble de qualité (paire torsadée blindée, 120 $\Omega$)
+            \item Installer une résistance de terminaison en bout de ligne
+            \item Protéger le câble des intempéries et du passage du public
+            \item Prévoir un chemin de câble dédié, séparé des alimentations électriques 230V
+        \end{itemize}
+
+        \textbf{7)} Schéma de câblage proposé :
+
+        \textit{Stratégie :} Créer une chaîne qui minimise les allers-retours.
+
+        Exemple de parcours : Régie $\to$ Groupe 1 (Jardin avant) $\to$ Groupe 3 (Jardin arrière) $\to$ Lyres (fond de scène) $\to$ Groupe 4 (Cour arrière) $\to$ Groupe 2 (Cour avant) $\to$ retour.
+
+        Alternative : Utiliser un splitter DMX au niveau de la scène pour créer plusieurs branches et réduire la longueur totale de câble.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

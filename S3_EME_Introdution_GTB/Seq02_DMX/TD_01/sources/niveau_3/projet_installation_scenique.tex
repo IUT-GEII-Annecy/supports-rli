@@ -1,0 +1,80 @@
+\begin{UPSTIexercice}{Projet d'installation scénique}
+Une salle de spectacle souhaite installer un système d'éclairage DMX composé de :
+\begin{itemize}
+    \item 24 projecteurs PAR LED RGBA (4 canaux chacun)
+    \item 8 lyres asservies (20 canaux chacune)
+    \item 12 projecteurs à gobo (10 canaux chacun)
+    \item 4 machines à fumée (2 canaux chacune)
+\end{itemize}
+
+\UPSTIquestion{Calculer le nombre total de canaux DMX nécessaires.}
+\UPSTIquestion{Cette installation peut-elle tenir sur un seul univers DMX ? Justifier.}
+\UPSTIquestion{Si nécessaire, proposer une répartition des appareils sur plusieurs univers en optimisant l'utilisation des canaux.}
+\UPSTIquestion{Établir un plan d'adressage complet pour le premier univers en regroupant les appareils par type.}
+\UPSTIquestion{Le câble DMX doit parcourir 180 mètres entre le contrôleur et le dernier appareil. Cette distance est-elle acceptable ? Que proposez-vous si la distance était de 450 mètres ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Projet d'installation scénique}
+        \textbf{1)} Calcul du nombre de canaux :
+        \begin{align*}
+        N_{\text{total}} &= (24 \times 4) + (8 \times 20) + (12 \times 10) + (4 \times 2) \\
+        &= 96 + 160 + 120 + 8 \\
+        &= \boxed{384~\text{canaux}}
+        \end{align*}
+
+        \textbf{2)} $384 < 512$ : Oui, cette installation \textbf{peut tenir sur un seul univers DMX}.
+
+        Il reste $512 - 384 = 128$ canaux disponibles.
+
+        \textbf{3)} Un seul univers suffit. Pas besoin de répartition.
+
+        \textbf{4)} Plan d'adressage du premier (et unique) univers :
+
+        \begin{center}
+        \scriptsize
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Appareil} & \textbf{Type} & \textbf{Adresse} & \textbf{Canaux} \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{PAR LED RGBA (24 appareils)}} \\
+        \hline
+        PAR 1 & 4 canaux & 1 & 1-4 \\
+        PAR 2 & 4 canaux & 5 & 5-8 \\
+        ... & ... & ... & ... \\
+        PAR 24 & 4 canaux & 93 & 93-96 \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Lyres asservies (8 appareils)}} \\
+        \hline
+        Lyre 1 & 20 canaux & 97 & 97-116 \\
+        Lyre 2 & 20 canaux & 117 & 117-136 \\
+        ... & ... & ... & ... \\
+        Lyre 8 & 20 canaux & 237 & 237-256 \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Projecteurs à gobo (12 appareils)}} \\
+        \hline
+        Gobo 1 & 10 canaux & 257 & 257-266 \\
+        Gobo 2 & 10 canaux & 267 & 267-276 \\
+        ... & ... & ... & ... \\
+        Gobo 12 & 10 canaux & 367 & 367-376 \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Machines à fumée (4 appareils)}} \\
+        \hline
+        Fumée 1 & 2 canaux & 377 & 377-378 \\
+        Fumée 2 & 2 canaux & 379 & 379-380 \\
+        Fumée 3 & 2 canaux & 381 & 381-382 \\
+        Fumée 4 & 2 canaux & 383 & 383-384 \\
+        \hline
+        \end{tabular}
+        \end{center}
+
+        \textbf{5)} Distance de 180 m : \textbf{Acceptable} (limite DMX : 300-400 m).
+
+        Pour 450 m : \textbf{Hors limite}. Solutions possibles :
+        \begin{itemize}
+            \item Utiliser un \textbf{répéteur DMX} (splitter) à mi-parcours pour régénérer le signal
+            \item Utiliser un système \textbf{DMX sur Ethernet} (Art-Net, sACN) avec conversion DMX/Ethernet
+            \item Utiliser une transmission \textbf{DMX sans fil} (wireless DMX)
+        \end{itemize}
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

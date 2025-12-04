@@ -1,0 +1,26 @@
+\begin{UPSTIexercice}{Nombre maximal d'appareils}
+On dispose d'un univers DMX (512 canaux) que l'on souhaite utiliser pour installer des projecteurs LED RGBW (4 canaux chacun : Rouge, Vert, Bleu, Blanc).
+
+\UPSTIquestion{Combien de projecteurs RGBW peut-on installer au maximum sur cet univers DMX ?}
+\UPSTIquestion{Justifier votre réponse par un calcul.}
+\UPSTIquestion{Quel sera le numéro du dernier canal utilisé ?}
+\UPSTIquestion{Combien de canaux resteront inutilisés ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Nombre maximal d'appareils}
+        \textbf{1)} Calcul :
+        \[
+        N_{\text{max}} = \left\lfloor \frac{512~\text{canaux}}{4~\text{canaux/projecteur}} \right\rfloor = \left\lfloor 128 \right\rfloor = \boxed{128~\text{projecteurs}}
+        \]
+
+        \textbf{2)} On divise le nombre total de canaux (512) par le nombre de canaux par appareil (4). La partie entière donne le nombre maximal d'appareils.
+
+        \textbf{3)} Dernier canal utilisé :
+        \[
+        \text{Dernier canal} = 128 \times 4 = \boxed{512}
+        \]
+
+        \textbf{4)} Canaux inutilisés : $512 - 512 = \boxed{0~\text{canal}}$ (tous les canaux sont utilisés)
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

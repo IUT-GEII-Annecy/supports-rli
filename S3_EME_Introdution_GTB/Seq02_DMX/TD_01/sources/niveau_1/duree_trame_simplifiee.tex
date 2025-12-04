@@ -1,0 +1,35 @@
+\begin{UPSTIexercice}{Durée d'une trame DMX simplifiée}
+On souhaite calculer la durée d'une trame DMX transmettant \textbf{8 canaux} (en plus du Start Code).
+
+On considère les valeurs typiques suivantes :
+\begin{itemize}
+    \item BREAK : 176 $\mu$s
+    \item MAB : 12 $\mu$s
+    \item Durée d'un octet : 44 $\mu$s
+\end{itemize}
+
+\UPSTIquestion{Combien d'octets sont transmis au total dans cette trame ? (Penser au Start Code)}
+\UPSTIquestion{Calculer la durée totale de transmission de tous les octets (Start Code + 8 canaux).}
+\UPSTIquestion{Calculer la durée totale de la trame complète (BREAK + MAB + octets).}
+\UPSTIquestion{Exprimer ce résultat en millisecondes.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Durée d'une trame DMX simplifiée}
+        \textbf{1)} Nombre d'octets : 1 Start Code + 8 canaux = \textbf{9 octets}
+
+        \textbf{2)} Durée de transmission des octets :
+        \[
+        T_{\text{octets}} = 9 \times 44~\mu\text{s} = 396~\mu\text{s}
+        \]
+
+        \textbf{3)} Durée totale de la trame :
+        \begin{align*}
+        T_{\text{trame}} &= T_{\text{BREAK}} + T_{\text{MAB}} + T_{\text{octets}} \\
+        &= 176~\mu\text{s} + 12~\mu\text{s} + 396~\mu\text{s} \\
+        &= 584~\mu\text{s}
+        \end{align*}
+
+        \textbf{4)} En millisecondes : $T_{\text{trame}} = 584~\mu\text{s} = \boxed{0{,}584~\text{ms}}$
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

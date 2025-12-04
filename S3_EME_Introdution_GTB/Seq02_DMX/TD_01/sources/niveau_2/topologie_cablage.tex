@@ -1,0 +1,21 @@
+\begin{UPSTIexercice}{Topologie et câblage}
+\UPSTIquestion{Quelle est la topologie réseau utilisée par le DMX ? (bus, étoile, anneau, chaîne...)}
+\UPSTIquestion{Pourquoi ne peut-on pas faire de dérivation en "T" sur un réseau DMX ?}
+\UPSTIquestion{Combien de récepteurs maximum peut-on connecter sur un univers DMX ? (limitation électrique)}
+\UPSTIquestion{Quelle solution permet de connecter plus de 32 appareils sur un même univers DMX ?}
+\UPSTIquestion{Quel type de câble doit-on utiliser pour une installation DMX de qualité ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Topologie et câblage}
+        \textbf{1)} Topologie : \textbf{Chaîne} (daisy chain) ou bus linéaire.
+
+        \textbf{2)} Les dérivations en "T" créent des \textbf{désadaptations d'impédance} qui provoquent des réflexions de signal et peuvent corrompre les données. Le signal doit traverser chaque appareil séquentiellement (IN $\to$ OUT).
+
+        \textbf{3)} Maximum : \textbf{32 récepteurs} (limitation de charge électrique du RS-485).
+
+        \textbf{4)} Solution : Utiliser un \textbf{splitter DMX} (aussi appelé répéteur ou amplificateur DMX) qui régénère le signal et permet de créer plusieurs branches.
+
+        \textbf{5)} Câble recommandé : \textbf{Paire torsadée blindée} (STP - Shielded Twisted Pair) avec une impédance de 120 $\Omega$.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

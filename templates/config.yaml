@@ -1,0 +1,23 @@
+discipline_name: "RLI - GTB/Domotique"
+discipline_code: "RLI"
+
+# Chemins templates
+templates_base: "../../templates/base"
+templates_override: "../../templates/disciplines/rli/overrides"
+
+# LaTeX
+latex_class: "../../latex/UPSTI_Document"
+profile: "../../latex/profiles/Lycee_STI2D.tex"
+
+# Paramètres par défaut
+default_author: "Équipe RLI"
+default_institution: "Lycée Technique - STI2D"
+
+# Types de documents supportés
+document_types:
+  - tp
+  - td
+  - cours
+  - ds
+  - activite
+  - projet

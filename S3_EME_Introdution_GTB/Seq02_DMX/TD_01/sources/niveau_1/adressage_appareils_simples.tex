@@ -1,0 +1,54 @@
+\begin{UPSTIexercice}{Adressage d'appareils simples}
+On installe 4 projecteurs LED RGB sur un bus DMX. Chaque projecteur utilise 3 canaux consécutifs (Rouge, Vert, Bleu).
+
+Le premier projecteur (PAR 1) est configuré à l'adresse DMX 1.
+
+\UPSTIquestion{Quels canaux DMX seront utilisés par le projecteur PAR 1 ?}
+\UPSTIquestion{À quelle adresse doit-on configurer le projecteur PAR 2 pour qu'il utilise les canaux suivants ?}
+\UPSTIquestion{Compléter le tableau d'adressage suivant :}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Projecteur} & \textbf{Adresse DMX} & \textbf{Canaux utilisés} & \textbf{Nombre de canaux} \\
+\hline
+PAR 1 & 1 & 1, 2, 3 & 3 \\
+\hline
+PAR 2 & ? & ? & 3 \\
+\hline
+PAR 3 & ? & ? & 3 \\
+\hline
+PAR 4 & ? & ? & 3 \\
+\hline
+\end{tabular}
+\end{center}
+
+\UPSTIquestion{Quel est le numéro du dernier canal utilisé dans cette installation ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Adressage d'appareils simples}
+        \textbf{1)} PAR 1 (adresse 1) utilise les canaux \textbf{1, 2 et 3} (R, G, B).
+
+        \textbf{2)} PAR 2 doit être configuré à l'\textbf{adresse 4} (juste après les 3 canaux du PAR 1).
+
+        \textbf{3)} Tableau complété :
+        \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Projecteur} & \textbf{Adresse DMX} & \textbf{Canaux utilisés} & \textbf{Nombre de canaux} \\
+        \hline
+        PAR 1 & 1 & 1, 2, 3 & 3 \\
+        \hline
+        PAR 2 & 4 & 4, 5, 6 & 3 \\
+        \hline
+        PAR 3 & 7 & 7, 8, 9 & 3 \\
+        \hline
+        PAR 4 & 10 & 10, 11, 12 & 3 \\
+        \hline
+        \end{tabular}
+        \end{center}
+
+        \textbf{4)} Le dernier canal utilisé est le \textbf{canal 12}.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

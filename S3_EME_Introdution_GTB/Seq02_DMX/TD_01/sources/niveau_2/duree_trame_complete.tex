@@ -1,0 +1,41 @@
+\begin{UPSTIexercice}{Durée d'une trame DMX complète}
+On considère une trame DMX transmettant les \textbf{512 canaux} complets.
+
+Valeurs à utiliser :
+\begin{itemize}
+    \item BREAK : 176 $\mu$s
+    \item MAB : 12 $\mu$s
+    \item Durée d'un octet : 44 $\mu$s
+\end{itemize}
+
+\UPSTIquestion{Calculer la durée totale de transmission des octets (Start Code + 512 canaux).}
+\UPSTIquestion{Calculer la durée totale de la trame complète.}
+\UPSTIquestion{Exprimer ce résultat en millisecondes avec 2 chiffres après la virgule.}
+\UPSTIquestion{En déduire la fréquence maximale théorique de rafraîchissement (en Hz) pour une trame de 512 canaux.}
+\UPSTIquestion{Comparer ce résultat avec la fréquence indiquée dans l'encart page~\pageref{info:refresh}.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Durée d'une trame DMX complète}
+        \textbf{1)} Nombre d'octets : 1 Start Code + 512 canaux = 513 octets
+        \[
+        T_{\text{octets}} = 513 \times 44~\mu\text{s} = 22\,572~\mu\text{s}
+        \]
+
+        \textbf{2)} Durée totale :
+        \begin{align*}
+        T_{\text{trame}} &= T_{\text{BREAK}} + T_{\text{MAB}} + T_{\text{octets}} \\
+        &= 176 + 12 + 22\,572 \\
+        &= 22\,760~\mu\text{s}
+        \end{align*}
+
+        \textbf{3)} En millisecondes : $T_{\text{trame}} = \boxed{22{,}76~\text{ms}}$
+
+        \textbf{4)} Fréquence maximale :
+        \[
+        f_{\text{max}} = \frac{1}{T_{\text{trame}}} = \frac{1}{22{,}76 \times 10^{-3}} \approx \boxed{43{,}9~\text{Hz}}
+        \]
+
+        \textbf{5)} Ce résultat est cohérent avec la valeur de $\approx$ 44 Hz indiquée page~\pageref{info:refresh}.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

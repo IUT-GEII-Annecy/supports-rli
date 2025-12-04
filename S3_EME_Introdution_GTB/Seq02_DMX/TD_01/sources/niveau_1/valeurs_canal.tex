@@ -1,0 +1,37 @@
+\begin{UPSTIexercice}{Signification des valeurs de canal}
+Dans le contexte d'un projecteur avec variation d'intensité (dimmer), la valeur du canal DMX contrôle la luminosité.
+\UPSTIquestion{Que signifie une valeur de canal égale à 0 ?}
+\UPSTIquestion{Que signifie une valeur de canal égale à 255 ?}
+\UPSTIquestion{Quelle valeur de canal correspond approximativement à 50\% d'intensité ?}
+\UPSTIquestion{Pour un projecteur RGB (3 canaux : Rouge, Vert, Bleu), donner les valeurs des 3 canaux pour obtenir :}
+\begin{itemize}
+    \item Un rouge pur à pleine intensité
+    \item Du blanc à pleine intensité
+    \item Du jaune à pleine intensité
+    \item De l'éclairage éteint
+\end{itemize}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Signification des valeurs de canal}
+        \textbf{1)} Valeur 0 = \textbf{éteint} (0\% d'intensité)
+
+        \textbf{2)} Valeur 255 = \textbf{pleine intensité} (100\%)
+
+        \textbf{3)} 50\% d'intensité $\approx$ \textbf{127 ou 128} (255/2 = 127,5)
+
+        \textbf{4)} Valeurs pour un projecteur RGB :
+        \begin{center}
+        \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Couleur souhaitée} & \textbf{R} & \textbf{G} & \textbf{B} \\
+        \hline
+        Rouge pur & 255 & 0 & 0 \\
+        Blanc & 255 & 255 & 255 \\
+        Jaune (R+G) & 255 & 255 & 0 \\
+        Éteint & 0 & 0 & 0 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

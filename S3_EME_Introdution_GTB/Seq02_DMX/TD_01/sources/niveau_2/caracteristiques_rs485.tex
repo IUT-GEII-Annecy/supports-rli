@@ -1,0 +1,23 @@
+\begin{UPSTIexercice}{Caractéristiques du RS-485}
+Le protocole DMX512 utilise la couche physique RS-485 pour la transmission.
+
+\UPSTIquestion{Rappeler le principe de la transmission différentielle utilisée par le RS-485.}
+\UPSTIquestion{Pourquoi la transmission différentielle offre-t-elle une meilleure immunité au bruit qu'une transmission référencée à la masse ?}
+\UPSTIquestion{Quelle est la distance maximale recommandée pour une ligne DMX ?}
+\UPSTIquestion{Quelle est la valeur de l'impédance caractéristique du câble DMX ?}
+\UPSTIquestion{Pourquoi doit-on placer une résistance de terminaison en bout de ligne ?}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Caractéristiques du RS-485}
+        \textbf{1)} La transmission différentielle utilise \textbf{deux fils} (Data+ et Data-). Le signal utile est la \textbf{différence de tension} entre ces deux fils, et non la tension absolue par rapport à la masse.
+
+        \textbf{2)} Avantage : Les perturbations électromagnétiques affectent généralement les deux fils de manière identique (mode commun). La différence de tension reste donc constante, ce qui permet de rejeter le bruit.
+
+        \textbf{3)} Distance maximale : \textbf{300 à 400 mètres} selon les sources (la norme RS-485 permet 400m, mais le DMX est souvent limité à 300m en pratique).
+
+        \textbf{4)} Impédance caractéristique : \textbf{120 $\Omega$}
+
+        \textbf{5)} La résistance de terminaison (120 $\Omega$) évite les \textbf{réflexions de signal} en bout de ligne qui pourraient causer des erreurs de transmission. Elle adapte l'impédance en bout de câble.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

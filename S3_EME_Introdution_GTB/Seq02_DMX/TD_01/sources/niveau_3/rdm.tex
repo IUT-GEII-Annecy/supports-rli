@@ -1,0 +1,26 @@
+\begin{UPSTIexercice}{RDM (Remote Device Management)}
+Le protocole RDM est une extension du DMX512 qui permet une communication \textbf{bidirectionnelle}.
+
+\UPSTIquestion{Rechercher et expliquer brièvement ce qu'est le protocole RDM.}
+\UPSTIquestion{Quels sont les avantages du RDM par rapport au DMX standard ?}
+\UPSTIquestion{Quel est le Start Code utilisé pour les messages RDM ?}
+\UPSTIquestion{Le RDM est-il rétrocompatible avec le DMX standard ? Expliquer.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{RDM (Remote Device Management)}
+        \textbf{1)} Le RDM (ANSI E1.20) est une extension du DMX512 qui ajoute une communication bidirectionnelle. Il permet au contrôleur d'interroger les appareils et de recevoir des informations en retour.
+
+        \textbf{2)} Avantages du RDM :
+        \begin{itemize}
+            \item Configuration à distance (adressage automatique)
+            \item Diagnostic et monitoring (température, heures d'utilisation, erreurs)
+            \item Mise à jour de firmware à distance
+            \item Récupération d'informations (modèle, numéro de série, modes disponibles)
+        \end{itemize}
+
+        \textbf{3)} Le RDM utilise le Start Code \textbf{0xCC} (204 en décimal) pour ses messages.
+
+        \textbf{4)} Oui, le RDM est \textbf{rétrocompatible}. Les trames DMX standard (Start Code 0x00) continuent de fonctionner normalement. Les appareils non-RDM ignorent simplement les trames avec Start Code 0xCC. Les deux types de trames peuvent coexister sur le même bus.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

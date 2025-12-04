@@ -1,0 +1,26 @@
+\begin{UPSTIexercice}{Durée de transmission d'un octet}
+Le protocole DMX512 utilise une vitesse de transmission de 250 kbits/s. Chaque octet DMX est transmis avec 11 bits (1 start + 8 données + 2 stop).
+
+\UPSTIquestion{Rappeler la relation entre le débit binaire $D$ (en bits/s), le temps de transmission $T$ (en secondes) et le nombre de bits $n$.}
+\UPSTIquestion{Calculer la durée nécessaire pour transmettre 1 bit à 250 kbits/s.}
+\UPSTIquestion{En déduire la durée de transmission d'un octet DMX (11 bits).}
+\UPSTIquestion{Vérifier que ce résultat est cohérent avec la valeur donnée dans l'encart théorique page~\pageref{info:trame}.}
+\end{UPSTIexercice}
+
+\begin{UPSTIprofOnlyEnv}
+    \begin{UPSTIcorrectionP}{Durée de transmission d'un octet}
+        \textbf{1)} Relation : $T = \dfrac{n}{D}$ où $n$ est le nombre de bits et $D$ le débit en bits/s.
+
+        \textbf{2)} Durée pour 1 bit :
+        \[
+        T_{\text{bit}} = \frac{1}{250\,000~\text{bits/s}} = 4 \times 10^{-6}~\text{s} = 4~\mu\text{s}
+        \]
+
+        \textbf{3)} Durée pour 1 octet DMX (11 bits) :
+        \[
+        T_{\text{octet}} = 11 \times T_{\text{bit}} = 11 \times 4~\mu\text{s} = 44~\mu\text{s}
+        \]
+
+        \textbf{4)} Ce résultat est \textbf{cohérent} avec la valeur de 44 $\mu$s indiquée page~\pageref{info:trame}.
+    \end{UPSTIcorrectionP}
+\end{UPSTIprofOnlyEnv}

@@ -1,0 +1,214 @@
+\section*{Introduction au protocole DMX512}
+
+\subsection*{Contexte et objectifs}
+
+Le protocole \textbf{DMX512} (Digital Multiplex) est un standard de communication utilisé principalement dans l'industrie du spectacle et de l'éclairage scénique pour contrôler des équipements comme :
+\begin{itemize}
+    \item Les projecteurs à variation d'intensité (dimmers)
+    \item Les projecteurs asservis (lyres, scanners)
+    \item Les machines à effets (fumée, stroboscopes, etc.)
+    \item Les éclairages LED RGB/RGBA
+\end{itemize}
+
+\subsection*{Objectifs de ce TD}
+À l'issue de ce TD, vous serez capable de :
+\begin{itemize}
+    \item Expliquer le principe de fonctionnement du protocole DMX512
+    \item Décrire la structure d'une trame DMX
+    \item Calculer les caractéristiques temporelles d'une transmission DMX
+    \item Dimensionner un réseau DMX (câblage, connectique, terminaison)
+    \item Diagnostiquer des problèmes simples sur une installation DMX
+\end{itemize}
+
+\pagebreak
+
+\section*{Rappels théoriques}
+
+\begin{UPSTIinfor}{Qu'est-ce que le DMX512 ?}
+Le \textbf{DMX512} (USITT DMX512-A) est un protocole de communication série asynchrone unidirectionnel développé pour l'industrie du spectacle. Il permet de contrôler jusqu'à \textbf{512 canaux} (ou circuits) sur un seul bus.
+
+\textbf{Caractéristiques principales :}
+\begin{itemize}
+    \item \textbf{Débit :} 250 kbits/s
+    \item \textbf{Topologie :} Bus linéaire (chaîne)
+    \item \textbf{Nombre de canaux :} 512 maximum par univers
+    \item \textbf{Valeur d'un canal :} 0 à 255 (8 bits)
+    \item \textbf{Support physique :} RS-485 (paire différentielle)
+\end{itemize}
+\end{UPSTIinfor}
+
+\begin{UPSTIinfor}{La liaison série RS-485}
+\label{info:rs485}
+Le DMX512 utilise la couche physique \textbf{RS-485}, une norme de transmission série différentielle qui présente plusieurs avantages :
+
+\begin{description}
+    \item[Transmission différentielle :] Les données sont transmises sur deux fils (A et B ou Data+ et Data-). Le signal utile est la \textbf{différence de tension} entre ces deux fils, ce qui assure une bonne immunité au bruit.
+
+    \item[Distance maximale :] Jusqu'à \textbf{400 mètres} pour le DMX (limité par la norme DMX512-A à 300-400m selon les sources).
+
+    \item[Caractéristiques électriques :]
+    \begin{itemize}
+        \item Tension différentielle : $\pm$ 2V à $\pm$ 6V
+        \item Impédance caractéristique : 120 $\Omega$
+        \item Nécessite une résistance de terminaison de 120 $\Omega$ en bout de ligne
+    \end{itemize}
+\end{description}
+
+\textbf{Note importante :} Bien que DMX utilise parfois des connecteurs XLR à 3 ou 5 broches (comme pour l'audio), il s'agit d'un signal numérique et non d'un signal audio. Ne jamais confondre les deux !
+\end{UPSTIinfor}
+
+\begin{UPSTIinfor}{Structure d'une trame DMX512}
+\label{info:trame}
+Une trame DMX est composée de plusieurs parties, transmises en série :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{BREAK} & \textbf{MAB} & \textbf{Start Code} & \textbf{Canal 1} & \textbf{Canal 2} & \textbf{...} & \textbf{Canal 512} \\
+\hline
+$\geq 88~\mu$s & $\geq 8~\mu$s & 1 octet (0x00) & 1 octet & 1 octet & ... & 1 octet \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Description des éléments :}
+\begin{description}
+    \item[BREAK :] Signal bas (0 logique) d'au moins 88 $\mu$s (mais souvent 176 $\mu$s en pratique). Il marque le début d'une nouvelle trame.
+
+    \item[MAB (Mark After Break) :] Signal haut (1 logique) d'au moins 8 $\mu$s (souvent 12 $\mu$s). C'est un temps de repos après le BREAK.
+
+    \item[Start Code :] Un octet qui indique le type de données. Pour le DMX standard, c'est \textbf{0x00}. D'autres valeurs sont utilisées pour des extensions (RDM, texte, etc.).
+
+    \item[Canaux 1 à 512 :] Chaque canal est un octet (0-255) représentant une valeur de contrôle. Tous les canaux n'ont pas besoin d'être transmis (voir exercices).
+\end{description}
+
+\textbf{Format d'un octet DMX :}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Start} & \textbf{D0} & \textbf{D1} & \textbf{D2} & \textbf{D3} & \textbf{D4} & \textbf{D5} & \textbf{D6} & \textbf{D7} & \textbf{Stop} & \textbf{Stop} \\
+\hline
+0 & \multicolumn{8}{c|}{8 bits de données (LSB first)} & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Chaque octet est transmis avec :
+\begin{itemize}
+    \item 1 bit de START (0)
+    \item 8 bits de données (bit de poids faible D0 en premier)
+    \item 2 bits de STOP (1, 1)
+\end{itemize}
+
+\textbf{Durée de transmission d'un octet :}
+À 250 kbits/s, avec 11 bits par octet : $\frac{11 \text{ bits}}{250\,000 \text{ bits/s}} = 44~\mu\text{s}$
+\end{UPSTIinfor}
+
+\begin{UPSTIinfor}{Câblage et connectique DMX}
+\label{info:cablage}
+
+\textbf{Câble :}
+\begin{itemize}
+    \item Paire torsadée blindée (STP - Shielded Twisted Pair)
+    \item Impédance caractéristique : 120 $\Omega$ $\pm$ 20\%
+    \item Section recommandée : 0,22 à 0,5 mm$^2$
+    \item Blindage relié à la masse \textbf{uniquement côté émetteur}
+\end{itemize}
+
+\textbf{Connecteurs :}
+\begin{itemize}
+    \item \textbf{XLR 5 broches} (recommandé par la norme)
+    \item XLR 3 broches (usage courant mais non recommandé)
+\end{itemize}
+
+\textbf{Brochage XLR 5 broches :}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Broche} & \textbf{Fonction} \\
+\hline
+1 & Masse / Blindage (GND) \\
+2 & Data- (DMX-) \\
+3 & Data+ (DMX+) \\
+4 & Réservé (seconde paire) \\
+5 & Réservé (seconde paire) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Topologie :}
+\begin{itemize}
+    \item Architecture en \textbf{chaîne} (daisy chain) : émetteur $\to$ appareil 1 $\to$ appareil 2 $\to$ ... $\to$ appareil N
+    \item \textbf{Pas de dérivation en T} (star ou T-tap) : chaque appareil doit avoir une entrée DMX IN et une sortie DMX OUT
+    \item Nombre maximal d'appareils : \textbf{32 récepteurs} par univers (limitation électrique du RS-485)
+    \item Pour plus de 32 appareils : utiliser un \textbf{splitter DMX} (répéteur/amplificateur)
+\end{itemize}
+
+\textbf{Terminaison :}
+\begin{itemize}
+    \item Une résistance de \textbf{120 $\Omega$} doit être placée \textbf{en bout de ligne} (entre Data+ et Data-)
+    \item Cette résistance évite les réflexions de signal qui peuvent causer des erreurs de transmission
+    \item Certains appareils ont une terminaison intégrée (switch DIP ou menu)
+\end{itemize}
+\end{UPSTIinfor}
+
+\begin{UPSTIinfor}{Adressage DMX}
+\label{info:adressage}
+
+Chaque appareil DMX possède une \textbf{adresse de départ} (start address) qui détermine quels canaux du bus DMX il va écouter.
+
+\textbf{Exemples :}
+\begin{itemize}
+    \item Un \textbf{dimmer simple} (1 canal pour l'intensité) à l'adresse 1 écoute le canal 1
+    \item Un \textbf{projecteur RGB} (3 canaux : R, G, B) à l'adresse 10 écoute les canaux 10, 11 et 12
+    \item Une \textbf{lyre} (16 canaux : pan, tilt, couleur, gobo, etc.) à l'adresse 100 écoute les canaux 100 à 115
+\end{itemize}
+
+\textbf{Calcul du nombre d'appareils :}
+Si on a des appareils utilisant respectivement $n_1, n_2, \ldots, n_k$ canaux, il faut vérifier que :
+\[
+n_1 + n_2 + \cdots + n_k \leq 512
+\]
+
+\textbf{Plan d'adressage :}
+Il est essentiel de documenter l'adressage de chaque appareil pour faciliter la programmation et la maintenance. Un tableau typique contient :
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Appareil} & \textbf{Type} & \textbf{Adresse DMX} & \textbf{Nb canaux} \\
+\hline
+PAR LED 1 & RGB & 1 & 3 \\
+PAR LED 2 & RGB & 4 & 3 \\
+Lyre 1 & 16 canaux & 10 & 16 \\
+\hline
+\end{tabular}
+\end{center}
+\end{UPSTIinfor}
+
+\begin{UPSTIinfor}{Fréquence de rafraîchissement}
+\label{info:refresh}
+
+Le contrôleur DMX envoie des trames en continu, même si les valeurs ne changent pas. C'est le principe du \textbf{rafraîchissement}.
+
+\textbf{Fréquence typique :}
+\begin{itemize}
+    \item Minimum selon la norme : 1 Hz (1 trame par seconde)
+    \item Typique en pratique : 25 à 44 Hz (40 à 25 ms entre deux trames)
+\end{itemize}
+
+\textbf{Calcul de la durée d'une trame complète :}
+\begin{align*}
+T_{\text{trame}} &= T_{\text{BREAK}} + T_{\text{MAB}} + T_{\text{Start Code}} + T_{\text{canaux}} \\
+&= 176~\mu\text{s} + 12~\mu\text{s} + 44~\mu\text{s} + (N \times 44~\mu\text{s})
+\end{align*}
+
+où $N$ est le nombre de canaux transmis (de 1 à 512).
+
+\textbf{Exemple :} Pour 512 canaux :
+\begin{align*}
+T_{\text{trame}} &= 176 + 12 + 44 + (512 \times 44) \\
+&= 232 + 22\,528 = 22\,760~\mu\text{s} \approx 22{,}76~\text{ms}
+\end{align*}
+
+La fréquence maximale théorique est donc : $f_{\text{max}} = \frac{1}{22{,}76~\text{ms}} \approx 44~\text{Hz}$
+\end{UPSTIinfor}

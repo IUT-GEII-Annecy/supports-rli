@@ -1,0 +1,21 @@
+\documentclass[cours, noCustomPackages]{UPSTI_Document}
+\usepackage{IUT_Annecy}
+\usepackage{logos_iut}
+
+\usepackage{gitinfo2}
+
+\documentVersion{E}
+
+\newcommand{\UPSTInumeroVersion}{\gitAuthorDate\if \gitDirty*dirty \fi}
+\newcommand{\UPSTInumero}{\sequence.1}
+\input{../preamble.tex}
+\input{../../preamble_module.tex}
+
+\begin{document}
+     \input{introduction.tex}
+     \input{exemplesApplication.tex}
+     \pagebreak
+     \input{automate.tex}
+     \pagebreak
+     \input{dali.tex}
+\end{document}
